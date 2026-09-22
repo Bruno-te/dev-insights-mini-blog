@@ -3,7 +3,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 16px 24px;
-    background-color: #1a1a2e;
+    background-color: #8c9af9;
     color: white;
   }
   
@@ -13,7 +13,7 @@
   }
   
   .header-nav-link {
-    color: white;
+    color: rgb(243, 243, 247);
     text-decoration: none;
     font-weight: 500;
   }
