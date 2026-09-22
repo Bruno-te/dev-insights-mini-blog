@@ -1,32 +1,49 @@
-# React + TypeScript + Vite
+# Dev Insights — Mini Blog
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+An internal mini blog platform prototype built with React, TypeScript, and Vite, for employees to share quick web development tips and updates.
 
-Currently, two official plugins are available:
+## Installation & Running
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+1. Clone the repository:
+   \`\`\`bash
+   git clone https://github.com/Bruno-te/dev-insights-mini-blog.git
+   cd dev-insights-mini-blog
+   \`\`\`
+2. Install dependencies:
+   \`\`\`bash
+   npm install
+   \`\`\`
+3. Start the development server (powered by Vite):
+   \`\`\`bash
+   npm run dev
+   \`\`\`
+4. Open `http://localhost:5173/` in your browser.
 
-## React Compiler
+## Design Decisions
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Component types
+All components are functional components using hooks, rather than class components. React's own documentation now recommends function components as the standard approach — they avoid `this`-binding issues, let related lifecycle logic live together in a single `useEffect` instead of being split across `componentDidMount`/`componentWillUnmount`, and are what the `withLogger` HOC and `React.memo` optimizations are built around.
 
-## Expanding the Oxlint configuration
+### Styling
+Two styling methods are used:
+- **External CSS files** (one per component, in `src/styles/`) for the base layout and look.
+- **Inline styles** for conditional highlighting — the `Post` component applies a `style` prop conditionally when the post's author matches a highlighted author.
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+Conditional styling is also used for the "New!" badge, which appears on posts dated within the last 24 hours.
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
+### Optimization
+- `Post` is wrapped in `React.memo` so it only re-renders when its `post` prop actually changes.
+- Each `Post` rendered in `PostList` uses `post.id` (not array index) as its `key`, so React can correctly track individual posts even if the list is reordered or filtered later.
+- A `withLogger` higher-order component logs to the console when a wrapped component mounts and unmounts (applied to `Header`). This demonstrates the HOC pattern for cross-cutting behavior without duplicating logic inside each component.
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## Challenges
+
+_(fill this in with anything that actually gave you trouble — e.g. the HMR caching issue you hit earlier, or working out the generic typing for `withLogger`)_
+
+## Libraries Used
+
+- React
+- TypeScript
+- Vite
+
+No additional third-party UI or state libraries were used — everything is built with core React and TypeScript.
