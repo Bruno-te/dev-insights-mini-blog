@@ -1,4 +1,5 @@
 import '../styles/Header.css';
+import withLogger from './withLogger';
 
 const Header: React.FC = () => {
   return (
@@ -11,4 +12,4 @@ const Header: React.FC = () => {
   );
 };
 
-export default Header;
+export default withLogger(Header, 'Header');
