@@ -1,0 +1,39 @@
+.post {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 16px;
+    background-color: #fff;
+  }
+  
+  .post-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .post-title {
+    margin: 0;
+    font-size: 1.25rem;
+  }
+  
+  .post-badge {
+    background-color: #e63946;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 12px;
+    text-transform: uppercase;
+  }
+  
+  .post-meta {
+    color: #666;
+    font-size: 0.85rem;
+    margin: 4px 0 8px;
+  }
+  
+  .post-preview {
+    color: #333;
+    line-height: 1.4;
+  }
